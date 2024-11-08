@@ -10,7 +10,7 @@ namespace MyAnthemsAPI.Management.UserManagement.Queries
     {
         public async Task<List<UserDto>> Handle(ListUsersQuery request, CancellationToken cancellationToken)
         {
-            var result = await context.Users.ToListAsync();
+            var result = await context.Users.ToListAsync(cancellationToken);
             List<UserDto> resultingDtoList = mapper.Map<List<UserDto>>(result);
 
             return resultingDtoList;

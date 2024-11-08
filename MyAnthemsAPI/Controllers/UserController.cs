@@ -10,13 +10,20 @@ namespace MyAnthemsAPI.Controllers
         [HttpPost("Add")]
         public async Task<IResult> Add([FromBody] CreateUserCommand command)
         {
-            var user = await mediatr.Send(command);
-            if (user == null)
+            var id = await mediatr.Send(command);
+            if (Guid.Empty == id)
             {
                 return Results.BadRequest();
             }
 
-            return Results.Created($"/Right/{user}", new { user });
+            return Results.Created($"/Right/{id}", new { id });
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<IResult> Get(Guid id)
+        {
+            var user = await mediatr.Send(new GetUserQuery(id));
+            return Results.Ok(user);
         }
 
         [HttpGet]
@@ -24,6 +31,17 @@ namespace MyAnthemsAPI.Controllers
         {
             var users = await mediatr.Send(new ListUsersQuery());
             return Results.Ok(users);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IResult> Update(Guid id, UpdateUserCommand command)
+        {
+            if (id != command.Id)
+            {
+                return Results.BadRequest();
+            }
+            await mediatr.Send(command);
+            return Results.NoContent();
         }
 
         [HttpDelete("{id:guid}")]

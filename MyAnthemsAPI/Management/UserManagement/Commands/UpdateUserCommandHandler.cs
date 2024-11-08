@@ -4,12 +4,13 @@ using MyAnthemsAPI.Data;
 
 namespace MyAnthemsAPI.Management.UserManagement.Commands
 {
-    public class DeleteUserCommandHandler(AppDbContext context) : IRequestHandler<DeleteUserCommand>
+    public class UpdateUserCommandHandler(AppDbContext context) : IRequestHandler<UpdateUserCommand>
     {
-        public async Task Handle(DeleteUserCommand command, CancellationToken cancellationToken)
+        public async Task Handle(UpdateUserCommand command, CancellationToken cancellationToken)
         {
             var foundUser = await context.Users.SingleAsync(x => x.Id == command.Id, cancellationToken);
-            context.Users.Remove(foundUser);
+            foundUser.Username = command.Username;
+            foundUser.Email = command.Email;
             await context.SaveChangesAsync(cancellationToken);
         }
     }
