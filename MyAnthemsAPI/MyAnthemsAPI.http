@@ -1,6 +1,0 @@
-@MyAnthemsAPI_HostAddress = http://localhost:5148
-
-GET {{MyAnthemsAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
