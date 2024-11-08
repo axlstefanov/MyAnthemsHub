@@ -7,3 +7,5 @@ bin/
 obj/
 .vs/
 /MyAnthemsAPI/appsettings.json
+/MyAnthemsAPI/MyAnthems.db
+/MyAnthemsAPI/Migrations
