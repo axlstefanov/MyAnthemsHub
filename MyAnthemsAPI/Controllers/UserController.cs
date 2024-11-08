@@ -25,5 +25,12 @@ namespace MyAnthemsAPI.Controllers
             var users = await mediatr.Send(new ListUsersQuery());
             return Results.Ok(users);
         }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IResult> Delete(Guid id)
+        {
+            await mediatr.Send(new DeleteUserCommand(id));
+            return Results.NoContent();
+        }
     }
 }
