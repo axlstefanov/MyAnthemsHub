@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyAnthemsAPI.Behavior;
 using MyAnthemsAPI.Data;
+using MyAnthemsAPI.Services.Authentication;
 using System.Reflection;
 using System.Text;
 
@@ -36,8 +37,8 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddTransient<IJwtTokenService, JwtTokenService>();
 
 var app = builder.Build();
 
