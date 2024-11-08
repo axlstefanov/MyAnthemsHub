@@ -9,3 +9,5 @@ obj/
 /MyAnthemsAPI/appsettings.json
 /MyAnthemsAPI/MyAnthems.db
 /MyAnthemsAPI/Migrations
+/MyAnthemsAPI/myAnthems.db-shm
+/MyAnthemsAPI/myAnthems.db-wal
