@@ -10,7 +10,10 @@ namespace MyAnthemsAPI.Management.UserManagement.Queries
     {
         public async Task<UserDto> Handle(GetUserQuery request, CancellationToken cancellation)
         {
-            var result = await context.Users.FirstOrDefaultAsync(x => x.Id == request.Id, cancellation);
+            var result = await context.Users
+                .Include(u => u.Playlists)
+                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellation);
+
             UserDto user = mapper.Map<UserDto>(result);
             return user;
         }

@@ -16,7 +16,7 @@ namespace MyAnthemsAPI.Controllers
                 return Results.BadRequest();
             }
 
-            return Results.Created($"/Right/{id}", new { id });
+            return Results.Created($"/User/{id}", new { id });
         }
 
         [HttpGet("{id:guid}")]
