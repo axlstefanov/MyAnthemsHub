@@ -13,7 +13,6 @@ namespace MyAnthemsAPI.Behavior
             _validators = validators;
         }
 
-        //TODO Add Exception Handler
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var context = new ValidationContext<TRequest>(request);
@@ -26,7 +25,7 @@ namespace MyAnthemsAPI.Behavior
                 .Where(f => f != null)
                 .ToList();
 
-            if (failures.Any())
+            if (failures.Count > 0)
             {
                 throw new ValidationException(failures.First().ErrorMessage);
             }
