@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyAnthemsAPI.Management.PlaylistManagement.Commands;
 using MyAnthemsAPI.Management.PlaylistManagement.Queries;
@@ -6,6 +7,7 @@ using MyAnthemsAPI.Management.UserManagement.Queries;
 
 namespace MyAnthemsAPI.Controllers
 {
+    [Authorize]
     public class PlaylistController(ISender mediatr) : GenericController
     {
         [HttpPost("Add")]
