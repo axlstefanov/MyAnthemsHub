@@ -22,6 +22,16 @@ namespace MyAnthemsAPI.Controllers
             return Results.Created($"/Playlist/{id}", new { id });
         }
 
+        [HttpPost("{playlistId:guid}/AddSong/{songId:guid}")]
+        public async Task<IResult> AddSong(Guid playlistId, string songId)
+        {
+            var result = await mediatr.Send(new AddSongToPlaylistCommand(playlistId, songId));
+            if (!result)
+                return Results.BadRequest("Unable to add song to playlist.");
+
+            return Results.Ok("Song added successfully.");
+        }
+
         [HttpGet("{id:guid}")]
         public async Task<IResult> Get(Guid id)
         {

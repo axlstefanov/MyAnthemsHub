@@ -9,6 +9,6 @@ namespace MyAnthemsAPI.Models.PlaylistManagement
         public List<Song>? Songs { get; set; }
         public Guid UserId { get; set; }
 
-        public List<PlaylistSong>? PlaylistSongs { get; set; }
+        //public List<PlaylistSong>? PlaylistSongs { get; set; }
     }
 }

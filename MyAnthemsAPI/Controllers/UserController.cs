@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyAnthemsAPI.Management.UserManagement.Commands;
 using MyAnthemsAPI.Management.UserManagement.Queries;
@@ -19,6 +20,7 @@ namespace MyAnthemsAPI.Controllers
             return Results.Created($"/User/{id}", new { id });
         }
 
+        [Authorize]
         [HttpGet("{id:guid}")]
         public async Task<IResult> Get(Guid id)
         {
@@ -26,6 +28,7 @@ namespace MyAnthemsAPI.Controllers
             return Results.Ok(user);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IResult> GetAll()
         {
@@ -33,6 +36,7 @@ namespace MyAnthemsAPI.Controllers
             return Results.Ok(users);
         }
 
+        [Authorize]
         [HttpPut("{id:guid}")]
         public async Task<IResult> Update(Guid id, UpdateUserCommand command)
         {
@@ -44,6 +48,7 @@ namespace MyAnthemsAPI.Controllers
             return Results.NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id:guid}")]
         public async Task<IResult> Delete(Guid id)
         {
