@@ -9,10 +9,11 @@ namespace MyAnthemsAPI.Management.UserManagement.Commands
     {
         public async Task<Guid> Handle(CreateUserCommand command, CancellationToken cancellationToken)
         {
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(command.Password);
             var newUser = new User
             {
                 Username = command.Username,
-                Password = command.Password,
+                Password = hashedPassword,
                 Email = command.Email,
             };
 

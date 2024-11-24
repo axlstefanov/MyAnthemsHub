@@ -10,8 +10,8 @@ namespace MyAnthemsAPI.Management.LoginManagement.Commands
     {
         public async Task<LoginResponseDto> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
-            var foundUser = await context.Users.SingleOrDefaultAsync(x => x.Email == command.Email && x.Password == command.Password, cancellationToken);
-            if (foundUser == null)
+            var foundUser = await context.Users.SingleOrDefaultAsync(x => x.Email == command.Email, cancellationToken);
+            if (foundUser == null || !BCrypt.Net.BCrypt.Verify(command.Password, foundUser.Password))
             {
                 return new LoginResponseDto(Guid.Empty, "", "", "");
             }
